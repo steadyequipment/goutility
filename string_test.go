@@ -1,4 +1,4 @@
-package utility
+package goutility
 
 import (
 	"testing"
