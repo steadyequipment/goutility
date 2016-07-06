@@ -60,13 +60,13 @@ func StringOfStringRepeated(component string, count int) string {
 }
 
 // http://stackoverflow.com/a/31832326
-var RandomStringLetterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+var randomStringLetterRunes = []rune("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
 
 // RandomString create a random string of specified length
 func RandomString(length int) string {
 	b := make([]rune, length)
 	for i := range b {
-		b[i] = RandomStringLetterRunes[rand.Intn(len(RandomStringLetterRunes))]
+		b[i] = randomStringLetterRunes[rand.Intn(len(randomStringLetterRunes))]
 	}
 	return string(b)
 }
