@@ -21,6 +21,7 @@ func StringAppendWithJoin(left string, join string, right string) (result string
 	return
 }
 
+// PadStringToLength pad string with string until it is equal to or greater than length param and return the result
 func PadStringToLength(original string, padWith string, length int) string {
 	result := original
 	for {
@@ -48,6 +49,7 @@ func FirstCharacter(in string) string {
 	return string([]rune(in)[0])
 }
 
+// StringOfStringRepeated return a string composed of component repeated count times
 func StringOfStringRepeated(component string, count int) string {
 	components := []string{}
 	for times := 1; times <= count; times++ {
