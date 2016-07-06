@@ -50,18 +50,18 @@ func TestPathStrippedOfQuery(t *testing.T) {
 	path := "this is a path"
 	result := PathStrippedOfQuery(path)
 	if result != path {
-		t.Fatal("Result (\"%s\") does not match \"%s\"", result, path)
+		t.Fatalf("Result (\"%s\") does not match \"%s\"", result, path)
 	}
 
 	pathExtra := path + "{lalalaala}"
 	result = PathStrippedOfQuery(pathExtra)
 	if result != path {
-		t.Fatal("Result (\"%s\") does not match \"%s\"", result, path)
+		t.Fatalf("Result (\"%s\") does not match \"%s\"", result, path)
 	}
 
 	pathExtraExtra := pathExtra + "{asdf}"
 	result = PathStrippedOfQuery(pathExtraExtra)
 	if result != path {
-		t.Fatal("Result (\"%s\") does not match \"%s\"", result, path)
+		t.Fatalf("Result (\"%s\") does not match \"%s\"", result, path)
 	}
 }

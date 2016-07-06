@@ -28,7 +28,7 @@ func TestEmitOnChanOneLength(t *testing.T) {
 
 	value := <-oneLength
 	if value != test {
-		t.Fatal("Channel value was unexpected: %s vs %s", value, test)
+		t.Fatalf("Channel value was unexpected: %s vs %s", value, test)
 	}
 
 	emitOneLength(test)
@@ -55,7 +55,7 @@ func TestEmitOnChanTwoLength(t *testing.T) {
 
 	value := <-twoLength
 	if value != test {
-		t.Fatal("Channel value was unexpected: %s vs %s", value, test)
+		t.Fatalf("Channel value was unexpected: %s vs %s", value, test)
 	}
 
 	emitTwoLength(test)
