@@ -1,15 +1,8 @@
 package utility
 
 import (
-	"fmt"
 	"testing"
-
-	"os"
 )
-
-func TestMain(m *testing.M) {
-	os.Exit(m.Run())
-}
 
 func TestStringAppendWithJoin(t *testing.T) {
 	result := StringAppendWithJoin("", "", "")
