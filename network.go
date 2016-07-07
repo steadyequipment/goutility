@@ -18,16 +18,33 @@ func GetFirstNonLoopbackIP() (string, error) {
 
 		ip := GetAvailableIPFromAddress(addr)
 
-		if ip != nil && !ip.IsLoopback() {
-
-			// TODO: clarify function name, we're only looking for IPv4s here
-			ip = ip.To4()
-			if ip != nil {
-				return ip.String(), nil
-			}
+		// TODO: clarify function name, we're only looking for IPv4s here
+		// TODO: clarify function name, we're returning a string, not a net.IP
+		ipString := retreiveNonLoopbackV4IPString(ip)
+		if ipString != nil {
+			return *ipString, nil
 		}
 	}
 	return "", errors.New("Unable to find external ip address")
+}
+
+func retreiveNonLoopbackV4IPString(ip net.IP) *string {
+
+	if ip == nil {
+		return nil
+	}
+
+	if ip.IsLoopback() {
+		return nil
+	}
+
+	ipv4 := ip.To4()
+	if ipv4 == nil {
+		return nil
+	}
+
+	ipString := ipv4.String()
+	return &ipString
 }
 
 // GetAvailableIPFromAddress retrieves the IP from a net.Addr if one is available
