@@ -13,17 +13,19 @@ func GetFirstNonLoopbackIP() (string, error) {
 	if err != nil {
 		return "", err
 	}
+
 	for _, addr := range addrs {
 
 		ip := GetAvailableIPFromAddress(addr)
-		if ip == nil || ip.IsLoopback() {
-			continue
+
+		if ip != nil && !ip.IsLoopback() {
+
+			// TODO: clarify function name, we're only looking for IPv4s here
+			ip = ip.To4()
+			if ip != nil {
+				return ip.String(), nil
+			}
 		}
-		ip = ip.To4()
-		if ip == nil {
-			continue // not an ipv4 address
-		}
-		return ip.String(), nil
 	}
 	return "", errors.New("Unable to find external ip address")
 }
