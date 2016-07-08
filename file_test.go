@@ -75,16 +75,16 @@ func TestCopyFile(t *testing.T) {
 
 	sourceExists := testDoCopyFile(validSource, true, validDestination, false)
 	if sourceExists != nil {
-		t.Fatal("Source exists shouldn't have errored: %s", sourceExists)
+		t.Fatalf("Source exists shouldn't have errored: %s", sourceExists)
 	}
 	destinationExists := testDoCopyFile(validSource, true, validDestination, true)
 	if destinationExists != nil {
-		t.Fatal("Destination exists shouldn't have errored: %s", destinationExists)
+		t.Fatalf("Destination exists shouldn't have errored: %s", destinationExists)
 	}
 
 	sourceDoesNotExist := testDoCopyFile(validSource, false, validDestination, false)
 	if sourceDoesNotExist == nil {
-		t.Fatal("Source does not exist should have errored: %s", sourceDoesNotExist)
+		t.Fatalf("Source does not exist should have errored: %s", sourceDoesNotExist)
 	}
 }
 
