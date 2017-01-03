@@ -65,7 +65,7 @@ func WriteObjectToJSONFile(object interface{}, fileName string, pretty bool) (re
 	var marshalError error
 
 	if pretty == true {
-		fileContents, marshalError = json.MarshalIndent(object, "", "  ")
+		fileContents, marshalError = json.MarshalIndent(object, "", "    ")
 	} else {
 		fileContents, marshalError = json.Marshal(object)
 	}
