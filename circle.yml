@@ -1,6 +1,6 @@
 dependencies:
   override:
-
+    - echo "Skipping defaults (go get)"
 test:
   pre:
     - go get github.com/mattn/goveralls
