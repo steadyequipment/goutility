@@ -1,8 +1,8 @@
 package goutility
 
 import (
-	"path/filepath"
 	"os"
+	"path/filepath"
 )
 
 // CreatePathIfDoesNotExist ensures the path exists, even if it has to create it. Returns an error if there was a problem checking that the path exists or creating the path. Returns true if the path had to be created, false if the path already existed.
