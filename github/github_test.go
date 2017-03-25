@@ -13,17 +13,17 @@ import (
 const (
 	accessToken = "REPLACE_WITH_TOKEN"
 
-	existingOrgName = "REPLACE_WITH_EXISTING_ORG"
+	existingOrgName  = "REPLACE_WITH_EXISTING_ORG"
 	existingRepoName = "REPLACE_WITH_EXISTING_REPO"
 	existingFileName = "REPLACE_WITH_EXISTING_FILE_WITH_NO_LEADING_SLASH"
 
-	authorName = "REPLACE_WITH_AUTHOR_NAME"
+	authorName  = "REPLACE_WITH_AUTHOR_NAME"
 	authorEmail = "REPLACE_WITH_AUTHOR_EMAIL"
 )
 
 var (
 	author = &github.CommitAuthor{
-		Name: github.String(authorName),
+		Name:  github.String(authorName),
 		Email: github.String(authorEmail),
 	}
 )
@@ -117,10 +117,10 @@ func TestGetContents_invalid(t *testing.T) {
 
 func createFile(t *testing.T, client *github.Client, repository *github.Repository, path string, message string, contents string) *github.RepositoryContentResponse {
 	options := &github.RepositoryContentFileOptions{
-		Message: github.String(message),
-		Branch: github.String("master"),
-		Content: []byte(contents),
-		Author: author,
+		Message:   github.String(message),
+		Branch:    github.String("master"),
+		Content:   []byte(contents),
+		Author:    author,
 		Committer: author,
 	}
 
@@ -146,10 +146,10 @@ func TestCreateFile_existing(t *testing.T) {
 	repo := findRepoByOrg(t, client, existingOrgName, existingRepoName)
 
 	options := &github.RepositoryContentFileOptions{
-		Message: github.String("Test Create Existing File"),
-		Branch: github.String("master"),
-		Content: []byte("This is a test of the...nevermind"),
-		Author: author,
+		Message:   github.String("Test Create Existing File"),
+		Branch:    github.String("master"),
+		Content:   []byte("This is a test of the...nevermind"),
+		Author:    author,
 		Committer: author,
 	}
 	contents, error := CreateFile(client, repo, existingFileName, options)
@@ -183,12 +183,12 @@ func TestUpdateFile(t *testing.T) {
 	}
 
 	options := &github.RepositoryContentFileOptions{
-		Message: github.String("Test Update File : Update"),
-		Branch: github.String("master"),
-		Content: []byte("Firs oh, second."),
-		Author: author,
+		Message:   github.String("Test Update File : Update"),
+		Branch:    github.String("master"),
+		Content:   []byte("Firs oh, second."),
+		Author:    author,
 		Committer: author,
-		SHA: getContentsResult.SHA,
+		SHA:       getContentsResult.SHA,
 	}
 
 	contents, error := UpdateFile(client, repo, fileName, options)
@@ -204,7 +204,6 @@ func TestUpdateFile(t *testing.T) {
 // Unnecessary, a file existing or not is already determined by the required call to GetContents
 // func TestUpdateFile_nonexistant(t *testing.T)
 
-
 func TestCreateOrUpdateFile_create(t *testing.T) {
 
 	fileName := getNonExistantFileName("CreateOrUpdateFile_create")
@@ -213,10 +212,10 @@ func TestCreateOrUpdateFile_create(t *testing.T) {
 	repo := findRepoByOrg(t, client, existingOrgName, existingRepoName)
 
 	options := &github.RepositoryContentFileOptions{
-		Message: github.String("Test Create Or Update File : Create"),
-		Branch: github.String("master"),
-		Content: []byte("Firs oh, second."),
-		Author: author,
+		Message:   github.String("Test Create Or Update File : Create"),
+		Branch:    github.String("master"),
+		Content:   []byte("Firs oh, second."),
+		Author:    author,
 		Committer: author,
 	}
 
@@ -245,10 +244,10 @@ func TestCreateOrUpdateFile_update(t *testing.T) {
 	}
 
 	options := &github.RepositoryContentFileOptions{
-		Message: github.String("Test Create Or Update File : Update : Update"),
-		Branch: github.String("master"),
-		Content: []byte("Firs oh, second."),
-		Author: author,
+		Message:   github.String("Test Create Or Update File : Update : Update"),
+		Branch:    github.String("master"),
+		Content:   []byte("Firs oh, second."),
+		Author:    author,
 		Committer: author,
 	}
 
