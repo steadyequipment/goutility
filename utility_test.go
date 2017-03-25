@@ -82,3 +82,11 @@ func TestNewError(t *testing.T) {
 		t.Fatal("Unexpected result")
 	}
 }
+
+func TestCurrentExecutable(t *testing.T) {
+	result := CurrentExecutable()
+
+	if len(result) == 0 {
+		t.Fatalf("CurrentExecutable result should not be empty")
+	}
+}
