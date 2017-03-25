@@ -1,0 +1,8 @@
+test:
+  pre:
+    - go get github.com/mattn/goveralls
+  override:
+    - go test -v -cover -race -coverprofile=$CIRCLE_ARTIFACTS/coverage.out
+  post:
+    - go tool cover -html=$CIRCLE_ARTIFACTS/coverage.out -o $CIRCLE_ARTIFACTS/coverage.html
+    - /home/ubuntu/.go_workspace/bin/goveralls -coverprofile=$CIRCLE_ARTIFACTS/coverage.out -service=circle-ci -repotoken=$COVERALLS_TOKEN
