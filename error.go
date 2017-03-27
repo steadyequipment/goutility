@@ -29,7 +29,7 @@ func MakeErrorWithCode(message string, code ErrorCode, codeContext string) Error
 }
 
 func (this ErrorType) Error() string {
-	return fmt.Sprintf("Code: %d, Context: %s, %s", this.Code(), this.CodeContext(), this.Message())
+	return fmt.Sprintf("Context: %s, Code: %d, %s", this.Code(), this.CodeContext(), this.Message())
 }
 
 func (this ErrorType) Message() string {
