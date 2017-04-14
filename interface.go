@@ -5,7 +5,6 @@ import (
 
 	"reflect"
 
-	"encoding/json"
 	"io/ioutil"
 )
 
@@ -30,7 +29,7 @@ func SprintfObjectInstance(i interface{}) string {
 
 // SprintfObjectContents print contents of an object to a string
 func SprintfObjectContents(i interface{}) (result string, error error) {
-	marshalResult, marshalError := json.Marshal(i)
+	marshalResult, marshalError := MarshalToJSON(i)
 
 	error = marshalError
 	if marshalResult != nil && len(marshalResult) > 0 {
@@ -49,10 +48,7 @@ func ReadObjectFromJSONFile(object interface{}, fileName string) (error error) {
 		error = readFileError
 	} else {
 
-		marshalError := json.Unmarshal(fileContents, object)
-		if marshalError != nil {
-			error = marshalError
-		}
+		error = UnmarshalFromJSON(fileContents, object)
 	}
 
 	return
@@ -65,9 +61,9 @@ func WriteObjectToJSONFile(object interface{}, fileName string, pretty bool) (re
 	var marshalError error
 
 	if pretty == true {
-		fileContents, marshalError = json.MarshalIndent(object, "", "    ")
+		fileContents, marshalError = MarshalIndentToJSON(object, "", "    ")
 	} else {
-		fileContents, marshalError = json.Marshal(object)
+		fileContents, marshalError = MarshalToJSON(object)
 	}
 
 	if marshalError != nil {
