@@ -64,3 +64,41 @@ func MakeUnmashalError(object interface{}, error error) UnmarshalError {
 }
 
 // endregion
+
+// region ReadFileError
+type ReadFileError struct {
+	ErrorType
+
+	filePath string
+	error    error
+}
+
+func MakeReadFileError(filePath string, error error) ReadFileError {
+	message := fmt.Sprintf("Error while reading file '%s': %s", filePath, error.Error())
+	return ReadFileError{
+		ErrorType: MakeErrorWithCode(message, MarshalErrorCode, CodeContext),
+		filePath:  filePath,
+		error:     error,
+	}
+}
+
+// endregion
+
+// region WriteFileError
+type WriteFileError struct {
+	ErrorType
+
+	filePath string
+	error    error
+}
+
+func MakeWriteFileError(filePath string, error error) WriteFileError {
+	message := fmt.Sprintf("Error while writing file '%s': %s", filePath, error.Error())
+	return WriteFileError{
+		ErrorType: MakeErrorWithCode(message, UnmarshalErrorCode, CodeContext),
+		filePath:  filePath,
+		error:     error,
+	}
+}
+
+// endregion

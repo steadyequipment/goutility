@@ -4,8 +4,6 @@ import (
 	"fmt"
 
 	"reflect"
-
-	"io/ioutil"
 )
 
 // SprintfObject print information about an object to a string, optionally include its contents
@@ -40,25 +38,21 @@ func SprintfObjectContents(i interface{}) (result string, error error) {
 }
 
 // ReadObjectFromJSONFile read an object from a JSON file
-func ReadObjectFromJSONFile(object interface{}, fileName string) (error error) {
+func ReadObjectFromJSONFile(object interface{}, fileName string) ErrorTypeInterface {
 
-	fileContents, readFileError := ioutil.ReadFile(fileName)
+	fileContents, readFileError := ReadFile(fileName)
 	if readFileError != nil {
-
-		error = readFileError
-	} else {
-
-		error = UnmarshalFromJSON(fileContents, object)
+		return readFileError
 	}
 
-	return
+	return UnmarshalFromJSON(fileContents, object)
 }
 
 // WriteObjectToJSONFile write an object to a JSON file
-func WriteObjectToJSONFile(object interface{}, fileName string, pretty bool) (result error) {
+func WriteObjectToJSONFile(object interface{}, fileName string, pretty bool) ErrorTypeInterface {
 
 	var fileContents []byte
-	var marshalError error
+	var marshalError ErrorTypeInterface
 
 	if pretty == true {
 		fileContents, marshalError = MarshalIndentToJSON(object, "", "    ")
@@ -67,14 +61,8 @@ func WriteObjectToJSONFile(object interface{}, fileName string, pretty bool) (re
 	}
 
 	if marshalError != nil {
-		result = marshalError
-	} else {
-
-		writeError := ioutil.WriteFile(fileName, fileContents, 0644)
-		if writeError != nil {
-			result = writeError
-		}
+		return marshalError
 	}
 
-	return
+	return WriteFile(fileName, fileContents, 0644)
 }
