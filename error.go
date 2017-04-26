@@ -9,6 +9,18 @@ const (
 
 type ErrorCode int
 
+type ErrorTypeInterface interface {
+	Error() string
+
+	Message() string
+
+	Code() ErrorCode
+
+	CodeContext() string
+
+	HasValidCode() bool
+}
+
 type ErrorType struct {
 	message string
 

@@ -4,7 +4,7 @@
         {
             "name": "github.com/golang/protobuf",
             "branch": "master",
-            "revision": "c9c7427a2a70d2eb3bafa0ab2dc163e45f143317",
+            "revision": "2bba0603135d7d7f5cb73b2125beeda19c09f4ef",
             "packages": [
                 "proto"
             ]
