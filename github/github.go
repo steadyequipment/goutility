@@ -1,6 +1,7 @@
 package github
 
 import (
+	"context"
 	"github.com/google/go-github/github"
 	"golang.org/x/oauth2"
 )
@@ -21,10 +22,12 @@ func FindRepoByOrg(client *github.Client, orgName string, repoName string) (*git
 		return nil, MakeNoClientProvidedError()
 	}
 
+	context := context.Background()
+
 	options := &github.RepositoryListByOrgOptions{}
 	var result *github.Repository = nil
 	for {
-		repositories, response, repoError := client.Repositories.ListByOrg(orgName, options)
+		repositories, response, repoError := client.Repositories.ListByOrg(context, orgName, options)
 		if repoError != nil {
 			return nil, MakeListingReposInOrgError(orgName, repoError)
 		}
@@ -59,7 +62,9 @@ func getContents(client *github.Client, repository *github.Repository, path stri
 		return nil, nil, nil, MakeNoRepoProvidedError()
 	}
 
+	context := context.Background()
 	contents, directoryContent, response, error := client.Repositories.GetContents(
+		context,
 		*repository.Owner.Login,
 		*repository.Name,
 		path,
@@ -88,7 +93,8 @@ func CreateFile(client *github.Client, repository *github.Repository, path strin
 		return nil, MakeNoRepoProvidedError()
 	}
 
-	contents, _, error := client.Repositories.CreateFile(*repository.Owner.Login, *repository.Name, path, options)
+	context := context.Background()
+	contents, _, error := client.Repositories.CreateFile(context, *repository.Owner.Login, *repository.Name, path, options)
 	return contents, error
 }
 
@@ -105,7 +111,8 @@ func UpdateFile(client *github.Client, repository *github.Repository, path strin
 		return nil, MakeNoOptionsProvidedError()
 	}
 
-	contents, _, error := client.Repositories.UpdateFile(*repository.Owner.Login, *repository.Name, path, options)
+	context := context.Background()
+	contents, _, error := client.Repositories.UpdateFile(context, *repository.Owner.Login, *repository.Name, path, options)
 	return contents, error
 }
 
